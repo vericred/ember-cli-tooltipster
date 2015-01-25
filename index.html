@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Ember-cli-tooltipster : An Ember CLI add-on that wraps jQuery Tooltipster into an ember component.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ember-cli-tooltipster</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/altrim/ember-cli-tooltipster">View on GitHub</a>
+
+          <h1 id="project_title">Ember-cli-tooltipster</h1>
+          <h2 id="project_tagline">An Ember CLI add-on that wraps jQuery Tooltipster into an ember component.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/altrim/ember-cli-tooltipster/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/altrim/ember-cli-tooltipster/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="ember-cli-tooltipster" class="anchor" href="#ember-cli-tooltipster" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ember CLI Tooltipster</h1>
+
+<p>An Ember CLI add-on that wraps <a href="http://iamceege.github.io/tooltipster/">Tooltipster</a> into an ember component. 
+The component supports only the basic options. Pull requests are welcome.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-sh"><pre><span class="pl-c"># install via npm</span>
+$ npm install ember-cli-tooltipster --save-dev
+<span class="pl-c"># run blueprint to fetch dependencies</span>
+$ ember g ember-cli-tooltipster</pre></div>
+
+<h2>
+<a id="basic-usage" class="anchor" href="#basic-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Usage</h2>
+
+<div class="highlight highlight-handlebars"><pre>  <span class="pl-sc">{{#tool-tipster</span> <span class="pl-v">title</span>=<span class="pl-s1"><span class="pl-pds">"</span>This is my div's tooltip message!<span class="pl-pds">"</span></span><span class="pl-sc">}}</span> 
+    This div has a tooltip when you hover over it! 
+  <span class="pl-sc">{{/tool-tipster}}</span></pre></div>
+
+<p><strong>with options</strong></p>
+
+<div class="highlight highlight-handlebars"><pre>  <span class="pl-sc">{{#tool-tipster</span> <span class="pl-v">title</span>=<span class="pl-s1"><span class="pl-pds">"</span>This is my div's tooltip message!<span class="pl-pds">"</span></span> triggerEvent=<span class="pl-s1"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span> position=<span class="pl-s1"><span class="pl-pds">"</span>right<span class="pl-pds">"</span></span><span class="pl-sc">}}</span> 
+    This div has a tooltip on the right when you click it! 
+  <span class="pl-sc">{{/tool-tipster}}</span></pre></div>
+
+<p><strong>extending the component</strong></p>
+
+<p>You can also easily extend the component to modify it to your needs (e.g a button component)</p>
+
+<p>Just import <code>TooltipsterComponent</code> into your component and extend it</p>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-c">//components/my-button.js</span>
+<span class="pl-k">import</span> TooltipsterComponent from <span class="pl-s1"><span class="pl-pds">'</span>ember-cli-tooltipster/components/tool-tipster<span class="pl-pds">'</span></span>;
+
+<span class="pl-s">export</span> <span class="pl-k">default</span> TooltipsterComponent.extend({
+    tagName<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>button<span class="pl-pds">'</span></span>,
+
+    classNames<span class="pl-k">:</span> [<span class="pl-s1"><span class="pl-pds">'</span>my-button-class<span class="pl-pds">'</span></span>],
+    <span class="pl-c">// define properties</span>
+  title<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>My tooltip<span class="pl-pds">'</span></span>,
+
+    position<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>left<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<p>Then in your template.</p>
+
+<div class="highlight highlight-handlebars"><pre><span class="pl-sc">{{#my-button}}</span> Tooltip Button <span class="pl-sc">{{/my-button}}</span></pre></div>
+
+<p>That's it now your button will have a nice tooltip on the left.</p>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<p>When using tooltipster, the following options are available: </p>
+
+<h4>
+<a id="position" class="anchor" href="#position" aria-hidden="true"><span class="octicon octicon-link"></span></a>position</h4>
+
+<p>Type: <code>String</code></p>
+
+<p>Default: <code>top</code></p>
+
+<p>Set the position of the tooltip.</p>
+
+<p>Available options: <code>[right, left, top, top-right, top-left, bottom, bottom-right, bottom-left]</code></p>
+
+<h3>
+<a id="offsetx" class="anchor" href="#offsetx" aria-hidden="true"><span class="octicon octicon-link"></span></a>offsetX</h3>
+
+<p>Type: <code>Number</code></p>
+
+<p>Default: 0</p>
+
+<p>Offsets the tooltip (in pixels) farther left/right from the origin.</p>
+
+<h3>
+<a id="offsety" class="anchor" href="#offsety" aria-hidden="true"><span class="octicon octicon-link"></span></a>offsetY</h3>
+
+<p>Type: <code>Number</code></p>
+
+<p>Default: 0</p>
+
+<p>Offsets the tooltip (in pixels) farther up/down from the origin.</p>
+
+<h4>
+<a id="animation" class="anchor" href="#animation" aria-hidden="true"><span class="octicon octicon-link"></span></a>animation</h4>
+
+<p>Type: <code>String</code></p>
+
+<p>Default: <code>fade</code></p>
+
+<p>Determines how the tooltip will animate in and out.</p>
+
+<p>Available Options: <code>[fade, grow, swing, slide, fall]</code></p>
+
+<h3>
+<a id="delay" class="anchor" href="#delay" aria-hidden="true"><span class="octicon octicon-link"></span></a>delay</h3>
+
+<p>Type: <code>Number</code></p>
+
+<p>Default: <code>300</code></p>
+
+<p>Delay how long it takes (in milliseconds) for the tooltip to start animating in.</p>
+
+<h4>
+<a id="theme" class="anchor" href="#theme" aria-hidden="true"><span class="octicon octicon-link"></span></a>theme</h4>
+
+<p>Type: <code>String</code> (CSS class)</p>
+
+<p>Default: <code>tooltipster-default</code></p>
+
+<p>Set the theme used for your tooltip. </p>
+
+<h3>
+<a id="triggerevent" class="anchor" href="#triggerevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>triggerEvent</h3>
+
+<p>Type: <code>String</code></p>
+
+<p>Default: <code>hover</code></p>
+
+<p>Set how tooltips should be activated and closed.</p>
+
+<p>Available options: <code>[hover, click]</code></p>
+
+<h3>
+<a id="arrow" class="anchor" href="#arrow" aria-hidden="true"><span class="octicon octicon-link"></span></a>arrow</h3>
+
+<p>Type: <code>Boolean</code></p>
+
+<p>Default: <code>true</code></p>
+
+<p>Adds the "speech bubble arrow" to the tooltip.</p>
+
+<h3>
+<a id="minwidth" class="anchor" href="#minwidth" aria-hidden="true"><span class="octicon octicon-link"></span></a>minWidth</h3>
+
+<p>Type: <code>Number</code></p>
+
+<p>Default: <code>0</code> (auto width)</p>
+
+<p>Set a minimum width for the tooltip.</p>
+
+<h3>
+<a id="maxwidth" class="anchor" href="#maxwidth" aria-hidden="true"><span class="octicon octicon-link"></span></a>maxWidth</h3>
+
+<p>Type: <code>Number</code></p>
+
+<p>Default <code>null</code> (no max width)</p>
+
+<p>Set a maximum width for the tooltip.</p>
+
+<h3>
+<a id="timer" class="anchor" href="#timer" aria-hidden="true"><span class="octicon octicon-link"></span></a>timer</h3>
+
+<p>Type: <code>Number</code></p>
+
+<p>Default: <code>0</code> (disabled)</p>
+
+<p>How long the tooltip should be allowed to live before closing.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ember-cli-tooltipster maintained by <a href="https://github.com/altrim">altrim</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
