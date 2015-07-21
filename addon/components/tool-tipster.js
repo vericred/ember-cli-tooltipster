@@ -4,17 +4,28 @@ export default Ember.Component.extend({
 
     classNameBindings: ['tooltip'],
 
+    checkForDestroyed: function (callback) {
+      if (this.get('isDestroying') || this.get('isDestroyed')) {
+        return;
+      }
+      callback.call(this);
+    },
+
     attributeBindings: ['title'],
 
     updateTitle: Ember.observer('title', function() {
       Ember.run.schedule('afterRender', this, function() {
-        this.$().tooltipster('content', this.get('title'));
+        this.checkForDestroyed(function () {
+          this.$().tooltipster('content', this.get('title'));
+        });
       });
     }),
 
     updateContent: Ember.observer('content', function(){
       Ember.run.schedule('afterRender', this, function() {
-        this.$().tooltipster('content', this.get('content'));
+        this.checkForDestroyed(function () {
+          this.$().tooltipster('content', this.get('content'));
+        });
       });
     }),
 
